@@ -10,22 +10,23 @@ using CumbreAllegro2.Models;
 
 namespace CumbreAllegro2.Controllers
 {
-    public class ColoniasController : Controller
+    public class CasasController : Controller
     {
         private readonly AdminContext _context;
 
-        public ColoniasController(AdminContext context)
+        public CasasController(AdminContext context)
         {
             _context = context;
         }
 
-        // GET: Colonias
+        // GET: Casas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Colonia.ToListAsync());
+            ViewBag.Calles = _context.Calles.ToList();
+            return View(await _context.Casas.ToListAsync());
         }
 
-        // GET: Colonias/Details/5
+        // GET: Casas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,40 @@ namespace CumbreAllegro2.Controllers
                 return NotFound();
             }
 
-            var colonia = await _context.Colonia
+            var casa = await _context.Casas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (colonia == null)
+            if (casa == null)
             {
                 return NotFound();
             }
 
-            return View(colonia);
+            return View(casa);
         }
 
-        // GET: Colonias/Create
+        // GET: Casas/Create
         public IActionResult Create()
         {
+            ViewBag.Calles = _context.Calles.ToList();
             return View();
         }
 
-        // POST: Colonias/Create
+        // POST: Casas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Sector,CodigoPostal,CargoMensual")] Colonia colonia)
+        public async Task<IActionResult> Create([Bind("Id,CalleId,Numero,NombrePropietario,Correo,Telefono1,Telefono2,Telefono3,AccesoCamaras")] Casa casa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(colonia);
+                _context.Add(casa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(colonia);
+            return View(casa);
         }
 
-        // GET: Colonias/Edit/5
+        // GET: Casas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +75,24 @@ namespace CumbreAllegro2.Controllers
                 return NotFound();
             }
 
-            var colonia = await _context.Colonia.FindAsync(id);
-            if (colonia == null)
+            var casa = await _context.Casas.FindAsync(id);
+            if (casa == null)
             {
                 return NotFound();
             }
-            return View(colonia);
+
+            ViewBag.Calles = _context.Calles.ToList();
+            return View(casa);
         }
 
-        // POST: Colonias/Edit/5
+        // POST: Casas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Sector,CodigoPostal,CargoMensual")] Colonia colonia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CalleId,Numero,NombrePropietario,Correo,Telefono1,Telefono2,Telefono3,AccesoCamaras")] Casa casa)
         {
-            if (id != colonia.Id)
+            if (id != casa.Id)
             {
                 return NotFound();
             }
@@ -97,12 +101,12 @@ namespace CumbreAllegro2.Controllers
             {
                 try
                 {
-                    _context.Update(colonia);
+                    _context.Update(casa);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ColoniaExists(colonia.Id))
+                    if (!CasaExists(casa.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +117,10 @@ namespace CumbreAllegro2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(colonia);
+            return View(casa);
         }
 
-        // GET: Colonias/Delete/5
+        // GET: Casas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +128,30 @@ namespace CumbreAllegro2.Controllers
                 return NotFound();
             }
 
-            var colonia = await _context.Colonia
+            var casa = await _context.Casas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (colonia == null)
+            if (casa == null)
             {
                 return NotFound();
             }
 
-            return View(colonia);
+            return View(casa);
         }
 
-        // POST: Colonias/Delete/5
+        // POST: Casas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var colonia = await _context.Colonia.FindAsync(id);
-            _context.Colonia.Remove(colonia);
+            var casa = await _context.Casas.FindAsync(id);
+            _context.Casas.Remove(casa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ColoniaExists(int id)
+        private bool CasaExists(int id)
         {
-            return _context.Colonia.Any(e => e.Id == id);
+            return _context.Casas.Any(e => e.Id == id);
         }
     }
 }

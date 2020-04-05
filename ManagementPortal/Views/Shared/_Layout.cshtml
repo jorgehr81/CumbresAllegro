@@ -24,8 +24,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Egresos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Cerrar mes</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Acciones</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Colonias" asp-action="Index">Generar Cargos mensuales</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Calles" asp-action="Index">Cerrar mes</a>
+                            </div>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -33,6 +38,7 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-area="" asp-controller="Colonias" asp-action="Index">Colonias</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Calles" asp-action="Index">Calles</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Casas" asp-action="Index">Casas</a>
                             </div>
                         </li>
 

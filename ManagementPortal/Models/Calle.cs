@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CumbreAllegro2.Models
 {
@@ -10,6 +7,7 @@ namespace CumbreAllegro2.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
 
+        [Display(Name = "Colonia")]
         public int ColoniaId { get; set; }
         public Colonia Colonia { get; set; }
         public string Referencia { get; set; }

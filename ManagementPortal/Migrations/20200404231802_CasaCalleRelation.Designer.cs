@@ -3,14 +3,16 @@ using CumbreAllegro2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CumbreAllegro2.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    partial class AdminContextModelSnapshot : ModelSnapshot
+    [Migration("20200404231802_CasaCalleRelation")]
+    partial class CasaCalleRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,9 +87,6 @@ namespace CumbreAllegro2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("CargoMensual")
-                        .HasColumnType("money");
 
                     b.Property<int>("CodigoPostal")
                         .HasColumnType("int");
